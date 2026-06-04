@@ -6,7 +6,7 @@ compatibility_flags = ["nodejs_compat"]
 [[d1_databases]]
 binding = "DB"
 database_name = "marshad-predict-db"
-database_id = "YOUR_D1_DATABASE_ID_HERE"
+database_id = "aa31cf94-1b1f-4573-8f23-91f5ba111fc4"
 
 [vars]
 APP_NAME = "Marshad Predict"
