@@ -1,0 +1,33 @@
+{
+  "name": "marshad-predict",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --fix --ext .ts,.tsx",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate:local": "wrangler d1 migrations apply marshad-predict-db --local",
+    "db:migrate:prod": "wrangler d1 migrations apply marshad-predict-db --remote",
+    "build": "wrangler deploy --dry-run --outdir=dist",
+    "preview": "wrangler preview"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.31.0",
+    "hono": "^4.4.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260604.1",
+    "@types/node": "^20.12.0",
+    "@typescript-eslint/eslint-plugin": "^8.60.1",
+    "@typescript-eslint/parser": "^8.60.1",
+    "drizzle-kit": "^0.22.0",
+    "eslint": "^9.0.0",
+    "eslint-plugin-tailwind-rtl": "latest",
+    "typescript": "^5.4.0",
+    "wrangler": "^4.98.0"
+  }
+}

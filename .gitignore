@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.dev.vars
+*.local.sqlite
+*.local.sqlite-journal
+wrangler.toml.bak
+.env
+.env.local
+
+# Never commit secrets
+.dev.vars
