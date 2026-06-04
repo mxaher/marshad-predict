@@ -45,6 +45,16 @@ function getFlag(team: string): string {
   return teamFlags[team] || '🏳️';
 }
 
+const stageLabels: Record<string, { ar: string; en: string }> = {
+  'Group Stage': { ar: 'دور المجموعات', en: 'Group Stage' },
+  'Round of 32': { ar: 'دور الـ 32', en: 'Round of 32' },
+  'Round of 16': { ar: 'دور الـ 16', en: 'Round of 16' },
+  'Quarter-Final': { ar: 'ربع النهائي', en: 'Quarter-Final' },
+  'Semi-Final': { ar: 'نصف النهائي', en: 'Semi-Final' },
+  'Third Place': { ar: 'تحديد المركز الثالث', en: 'Third Place' },
+  'Final': { ar: 'النهائي', en: 'Final' },
+};
+
 const MatchCard: FC<MatchCardProps> = ({ match, prediction, lang }) => {
   const now = new Date();
   const matchTime = new Date(match.match_datetime);
@@ -59,7 +69,7 @@ const MatchCard: FC<MatchCardProps> = ({ match, prediction, lang }) => {
   const awayFlag = getFlag(match.away_team);
 
   return (
-    <div class="bg-gray-900/80 border border-gray-800 rounded-lg p-4 hover:border-gray-600 transition-colors">
+    <div class="bg-card-bg border border-card-border rounded-xl p-4 hover:border-primary/40 transition-all shadow-lg">
       <div class="flex items-center justify-between mb-2 flex-wrap gap-1">
         <span class="text-xs text-gray-500 font-medium">
           #{match.match_number} {match.group_name ? `• ${match.group_name}` : ''} • {match.stage}

@@ -41,17 +41,21 @@ app.notFound((c) => {
   return c.html(
     <html lang={lang} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <head><meta charset="UTF-8" /><title>404 — {lang === 'ar' ? 'غير موجود' : 'Not Found'}</title>
-      <script src="https://cdn.tailwindcss.com"></script></head>
-      <body class="bg-darkbg text-white min-h-screen flex items-center justify-center">
+      <script src="https://cdn.tailwindcss.com"></script>
+      <script>{`tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#006847',accent:'#D4A843',darkbg:'#0B1A2E',}}}}`}</script>
+      <style>{`body{font-family:system-ui,-apple-system,sans-serif;background:#0B1A2E;color:#e2e8f0;}`}</style></head>
+      <body class="min-h-screen flex items-center justify-center px-4">
         <div class="text-center">
-          <span class="text-6xl">⚽</span>
-          <h1 class="text-4xl font-bold mt-4">404</h1>
-          <p class="text-gray-400 mt-2">
-            {lang === 'ar' ? 'الصفحة غير موجودة' : 'Page not found'}
-          </p>
-          <a href="/dashboard" class="inline-block mt-6 bg-primary hover:bg-green-700 text-white px-6 py-2 rounded-lg">
-            {lang === 'ar' ? 'العودة للرئيسية' : 'Back to Dashboard'}
-          </a>
+          <span class="text-6xl mb-4 block">⚽</span>
+          <div class="bg-[#112240] border border-[#1d3557] rounded-2xl p-8 max-w-md">
+            <h1 class="text-5xl font-bold text-accent">404</h1>
+            <p class="text-gray-400 mt-3 text-lg">
+              {lang === 'ar' ? 'الصفحة غير موجودة' : 'Page not found'}
+            </p>
+            <a href="/dashboard" class="inline-block mt-6 bg-primary hover:bg-[#008a5e] text-white px-6 py-2.5 rounded-xl font-semibold transition-all shadow-lg">
+              {lang === 'ar' ? 'العودة للرئيسية' : 'Back to Dashboard'}
+            </a>
+          </div>
         </div>
       </body>
     </html>

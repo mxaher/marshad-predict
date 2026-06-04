@@ -46,7 +46,7 @@ const DashboardPage: FC<DashboardPageProps> = ({ lang, session, user, nextMatch,
         </div>
 
         {/* Next match card */}
-        <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-6">
+        <div class="bg-card-bg border border-card-border rounded-xl p-6 shadow-lg">
           <p class="text-gray-400 text-sm mb-2">{lang === 'ar' ? 'المباراة القادمة' : 'Next Match'}</p>
           {nextMatch ? (
             <>
@@ -62,8 +62,8 @@ const DashboardPage: FC<DashboardPageProps> = ({ lang, session, user, nextMatch,
                   return lang === 'ar' ? `${d}ي ${h}س ${m}د` : `${d}d ${h}h ${m}m`;
                 })()}
               </p>
-              <a href="/fixtures" class="text-xs text-primary hover:text-green-400 mt-2 inline-block">
-                {lang === 'ar' ? 'اذهب إلى المباريات →' : 'Go to Fixtures →'}
+              <a href="/fixtures" class="text-xs text-primary hover:text-primary-light mt-2 inline-block">
+                {lang === 'ar' ? 'اذهب إلى المباريات ←' : 'Go to Fixtures →'}
               </a>
             </>
           ) : (
@@ -72,16 +72,16 @@ const DashboardPage: FC<DashboardPageProps> = ({ lang, session, user, nextMatch,
         </div>
 
         {/* Quick links */}
-        <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-6">
+        <div class="bg-card-bg border border-card-border rounded-xl p-6 shadow-lg">
           <p class="text-gray-400 text-sm mb-3">{lang === 'ar' ? 'روابط سريعة' : 'Quick Links'}</p>
           <div class="flex flex-col gap-2">
-            <a href="/fixtures" class="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg text-sm transition-colors">
+            <a href="/fixtures" class="bg-darkbg hover:bg-card-bg text-white border border-card-border px-4 py-2 rounded-xl text-sm transition-all">
               ⚽ {lang === 'ar' ? 'جميع المباريات' : 'All Fixtures'}
             </a>
-            <a href="/my-predictions" class="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg text-sm transition-colors">
+            <a href="/my-predictions" class="bg-darkbg hover:bg-card-bg text-white border border-card-border px-4 py-2 rounded-xl text-sm transition-all">
               📋 {lang === 'ar' ? 'توقعاتي' : 'My Predictions'}
             </a>
-            <a href="/leaderboard" class="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg text-sm transition-colors">
+            <a href="/leaderboard" class="bg-darkbg hover:bg-card-bg text-white border border-card-border px-4 py-2 rounded-xl text-sm transition-all">
               🏆 {lang === 'ar' ? 'لوحة الترتيب' : 'Leaderboard'}
             </a>
           </div>
@@ -89,14 +89,14 @@ const DashboardPage: FC<DashboardPageProps> = ({ lang, session, user, nextMatch,
       </div>
 
       {/* Recent results */}
-      <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-6">
+      <div class="bg-card-bg border border-card-border rounded-xl p-6 shadow-lg">
         <h3 class="text-lg font-bold text-white mb-4">
           {lang === 'ar' ? 'آخر النتائج' : 'Recent Results'}
         </h3>
         {lastResults.length > 0 ? (
           <div class="space-y-2">
             {lastResults.map(r => (
-              <div class="flex items-center justify-between bg-gray-800/50 rounded-lg px-4 py-3">
+              <div class="flex items-center justify-between bg-darkbg border border-card-border rounded-xl px-4 py-3">
                 <div class="flex items-center gap-3 flex-1">
                   <span class="text-xs text-gray-500">#{r.match_number}</span>
                   <span class="text-sm text-gray-300">

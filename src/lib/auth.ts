@@ -44,7 +44,8 @@ export async function signSession(payload: SessionPayload, secret: string): Prom
 
 export async function verifySession(cookie: string | undefined, secret: string): Promise<SessionPayload | null> {
   if (!cookie) return null;
-  const parts = cookie.split('.');
+  const sess = cookie.startsWith('session=') ? cookie.slice(8) : cookie;
+  const parts = sess.split('.');
   if (parts.length !== 2) return null;
   const [dataB64, sigHex] = parts;
   try {

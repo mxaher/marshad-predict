@@ -1,5 +1,5 @@
 import { FC, Child } from 'hono/jsx';
-import { getLang, t, SessionPayload } from '../lib/auth';
+import { SessionPayload } from '../lib/auth';
 
 interface LayoutProps {
   children: Child;
@@ -26,72 +26,83 @@ const Layout: FC<LayoutProps> = ({ children, lang: langProp, session, title }) =
               extend: {
                 colors: {
                   primary: '#006847',
-                  accent: '#C8A84B',
-                  darkbg: '#0A1628',
+                  'primary-light': '#008a5e',
+                  'primary-dark': '#004d34',
+                  accent: '#D4A843',
+                  'accent-light': '#e8c56a',
+                  darkbg: '#0B1A2E',
+                  'card-bg': '#112240',
+                  'card-border': '#1d3557',
                 }
               }
             }
           }
         `}</script>
         <style>{`
-          body { font-family: system-ui, -apple-system, sans-serif; }
-          .lang-ar body, .lang-ar { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
-          @media (prefers-color-scheme: dark) {
-            .auto-dark { background-color: #0A1628; color: #e2e8f0; }
+          body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background-color: #0B1A2E;
+            color: #e2e8f0;
           }
+          [dir="rtl"] body, [dir="rtl"] {
+            font-family: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+          }
+          input, select, button { font-family: inherit; }
         `}</style>
       </head>
-      <body class="bg-darkbg text-gray-100 min-h-screen">
-        <header class="bg-gradient-to-r from-primary to-green-800 shadow-lg">
+      <body class="min-h-screen flex flex-col">
+        <header class="bg-gradient-to-r from-primary via-primary to-primary-dark shadow-xl border-b border-primary/30">
           <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between flex-wrap gap-2">
-            <div class="flex items-center gap-3">
-              <span class="text-2xl">⚽</span>
-              <h1 class="text-lg md:text-xl font-bold text-white">
-                {lang === 'ar' ? 'مرشد بريدكت' : 'Marshad Predict'}
-                <span class="text-accent text-sm block md:inline md:text-lg md:me-2">
-                  {lang === 'ar' ? '— توقعات كأس العالم 2026' : '— FIFA World Cup 2026™'}
+            <a href={session ? '/dashboard' : '/'} class="flex items-center gap-3 no-underline">
+              <span class="text-3xl drop-shadow-lg">⚽</span>
+              <div>
+                <h1 class="text-lg md:text-xl font-bold text-white drop-shadow-sm">
+                  {lang === 'ar' ? 'مرشد بريدكت' : 'Marshad Predict'}
+                </h1>
+                <span class="text-accent text-xs md:text-sm block -mt-1">
+                  {lang === 'ar' ? 'توقعات كأس العالم 2026' : 'FIFA World Cup 2026™ Predictions'}
                 </span>
-              </h1>
-            </div>
+              </div>
+            </a>
 
-            <nav class="flex items-center gap-2 flex-wrap">
+            <nav class="flex items-center gap-1 md:gap-2 flex-wrap">
               {session ? (
                 <>
-                  <a href="/dashboard" class="text-white hover:text-accent px-2 py-1 text-sm rounded transition-colors">
+                  <a href="/dashboard" class="text-gray-300 hover:text-white hover:bg-white/10 px-3 py-2 text-sm rounded-lg transition-all">
                     {lang === 'ar' ? 'الرئيسية' : 'Dashboard'}
                   </a>
-                  <a href="/fixtures" class="text-white hover:text-accent px-2 py-1 text-sm rounded transition-colors">
+                  <a href="/fixtures" class="text-gray-300 hover:text-white hover:bg-white/10 px-3 py-2 text-sm rounded-lg transition-all">
                     {lang === 'ar' ? 'المباريات' : 'Fixtures'}
                   </a>
-                  <a href="/my-predictions" class="text-white hover:text-accent px-2 py-1 text-sm rounded transition-colors">
+                  <a href="/my-predictions" class="text-gray-300 hover:text-white hover:bg-white/10 px-3 py-2 text-sm rounded-lg transition-all">
                     {lang === 'ar' ? 'توقعاتي' : 'My Picks'}
                   </a>
-                  <a href="/leaderboard" class="text-white hover:text-accent px-2 py-1 text-sm rounded transition-colors">
+                  <a href="/leaderboard" class="text-gray-300 hover:text-white hover:bg-white/10 px-3 py-2 text-sm rounded-lg transition-all">
                     {lang === 'ar' ? 'الترتيب' : 'Leaderboard'}
                   </a>
                   {session.isAdmin === 1 && (
-                    <a href="/admin/matches" class="text-accent hover:text-yellow-300 px-2 py-1 text-sm rounded border border-accent transition-colors">
+                    <a href="/admin/matches" class="text-accent hover:text-accent-light hover:bg-accent/10 px-3 py-2 text-sm rounded-lg border border-accent/40 transition-all">
                       {lang === 'ar' ? 'الإدارة' : 'Admin'}
                     </a>
                   )}
-                  <a href="/logout" class="text-red-300 hover:text-red-100 px-2 py-1 text-sm rounded transition-colors">
+                  <a href="/logout" class="text-red-400 hover:text-red-300 hover:bg-red-500/10 px-3 py-2 text-sm rounded-lg transition-all">
                     {lang === 'ar' ? 'خروج' : 'Logout'}
                   </a>
                 </>
               ) : (
                 <>
-                  <a href="/login" class="text-white hover:text-accent px-2 py-1 text-sm rounded transition-colors">
+                  <a href="/login" class="text-gray-300 hover:text-white hover:bg-white/10 px-3 py-2 text-sm rounded-lg transition-all">
                     {lang === 'ar' ? 'دخول' : 'Login'}
                   </a>
-                  <a href="/register" class="bg-accent text-darkbg hover:bg-yellow-400 px-3 py-1 text-sm rounded font-semibold transition-colors">
+                  <a href="/register" class="bg-accent text-darkbg hover:bg-accent-light px-4 py-2 text-sm rounded-lg font-bold shadow-lg transition-all">
                     {lang === 'ar' ? 'تسجيل' : 'Register'}
                   </a>
                 </>
               )}
 
-              <form action="/lang" method="post" class="inline">
+              <form action="/lang" method="post" class="inline me-1">
                 <input type="hidden" name="lang" value={lang === 'ar' ? 'en' : 'ar'} />
-                <button type="submit" class="ms-2 bg-white/10 hover:bg-white/20 text-white px-2 py-1 text-xs rounded transition-colors">
+                <button type="submit" class="bg-white/5 hover:bg-white/15 text-gray-400 hover:text-white px-2.5 py-1.5 text-xs rounded-lg border border-white/10 transition-all">
                   {lang === 'ar' ? 'EN' : 'AR'}
                 </button>
               </form>
@@ -99,11 +110,11 @@ const Layout: FC<LayoutProps> = ({ children, lang: langProp, session, title }) =
           </div>
         </header>
 
-        <main class="max-w-7xl mx-auto px-4 py-6">
+        <main class="flex-1 max-w-7xl mx-auto w-full px-4 py-6">
           {children}
         </main>
 
-        <footer class="text-center text-gray-500 text-xs py-4 border-t border-gray-800">
+        <footer class="text-center text-gray-500 text-xs py-4 border-t border-card-border mt-auto">
           <p>{lang === 'ar' ? '© 2026 مجموعة المرشد القابضة — جميع الحقوق محفوظة' : '© 2026 Almarshad Holding Group — All Rights Reserved'}</p>
         </footer>
       </body>

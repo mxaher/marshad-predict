@@ -5,7 +5,7 @@ interface LoginPageProps {
   lang: 'ar' | 'en';
   error?: string;
   mode?: 'login' | 'register';
-  departments?: string[];
+  departments?: string[] | { ar: string; en: string }[];
 }
 
 const LoginPage: FC<LoginPageProps> = ({ lang, error, mode, departments }) => {
@@ -14,7 +14,7 @@ const LoginPage: FC<LoginPageProps> = ({ lang, error, mode, departments }) => {
   return (
     <Layout lang={lang} title={lang === 'ar' ? (isLogin ? 'دخول' : 'تسجيل') : (isLogin ? 'Login' : 'Register')}>
       <div class="max-w-md mx-auto mt-12">
-        <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-8">
+        <div class="bg-card-bg border border-card-border rounded-2xl p-8 shadow-xl">
           <div class="text-center mb-6">
             <span class="text-4xl">⚽</span>
             <h2 class="text-2xl font-bold text-white mt-2">
@@ -42,7 +42,7 @@ const LoginPage: FC<LoginPageProps> = ({ lang, error, mode, departments }) => {
                 type="text"
                 name="username"
                 required
-                class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:border-primary focus:outline-none transition-colors"
+                class="w-full bg-darkbg border border-card-border rounded-xl px-4 py-2.5 text-white placeholder-gray-500 focus:border-primary focus:outline-none transition-all"
                 placeholder={lang === 'ar' ? 'أدخل اسم المستخدم' : 'Enter username'}
               />
             </div>
@@ -56,7 +56,7 @@ const LoginPage: FC<LoginPageProps> = ({ lang, error, mode, departments }) => {
                 name="password"
                 required
                 minlength={6}
-                class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:border-primary focus:outline-none transition-colors"
+                class="w-full bg-darkbg border border-card-border rounded-xl px-4 py-2.5 text-white placeholder-gray-500 focus:border-primary focus:outline-none transition-all"
                 placeholder={lang === 'ar' ? 'أدخل كلمة المرور' : 'Enter password'}
               />
             </div>
@@ -71,7 +71,7 @@ const LoginPage: FC<LoginPageProps> = ({ lang, error, mode, departments }) => {
                     type="text"
                     name="display_name"
                     required
-                    class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:border-primary focus:outline-none transition-colors"
+                    class="w-full bg-darkbg border border-card-border rounded-xl px-4 py-2.5 text-white placeholder-gray-500 focus:border-primary focus:outline-none transition-all"
                     placeholder={lang === 'ar' ? 'اسمك الكامل' : 'Your full name'}
                   />
                 </div>
@@ -83,11 +83,21 @@ const LoginPage: FC<LoginPageProps> = ({ lang, error, mode, departments }) => {
                   <select
                     name="department"
                     required
-                    class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:border-primary focus:outline-none transition-colors"
+                    class="w-full bg-darkbg border border-card-border rounded-xl px-4 py-2.5 text-white focus:border-primary focus:outline-none transition-all"
                   >
                     <option value="">{lang === 'ar' ? 'اختر القسم' : 'Select department'}</option>
-                    {(departments || ['Real Estate', 'Finance', 'IT', 'HR', 'Contracting', 'Electrical']).map(d => (
-                      <option value={d}>{d}</option>
+                    {(departments || [
+                      { ar: 'المالية', en: 'Finance' },
+                      { ar: 'الأصول العقارية', en: 'Real Estate' },
+                      { ar: 'الاستراتيجية', en: 'Strategy' },
+                      { ar: 'التقنية', en: 'IT' },
+                      { ar: 'الأمن السيبراني', en: 'Cybersecurity' },
+                      { ar: 'رأس المال البشري', en: 'Human Capital' },
+                      { ar: 'الاستثمار', en: 'Investment' },
+                      { ar: 'المشاريع', en: 'Projects' },
+                      { ar: 'إدارة المرافق', en: 'Facilities Management' },
+                    ]).map(d => (
+                      <option value={typeof d === 'string' ? d : d.en}>{typeof d === 'string' ? d : (lang === 'ar' ? d.ar : d.en)}</option>
                     ))}
                   </select>
                 </div>
